@@ -34,6 +34,7 @@ webpackUploadPlugin.prototype.apply = function(compiler){
         client.mkdir(target, function(error){
             if(error){
                 console.log(error)
+                client.close()
             }else{
                 filelist.forEach(function(filepath){
                     if(!new RegExp(exclude).exec(filepath)){

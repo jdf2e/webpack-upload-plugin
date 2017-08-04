@@ -8,7 +8,7 @@ npm install jdf2e-webpack-upload-plugin
 
 ## Usage
 
-```
+```javascript
 var webpack = require('webpack')
 var path = require('path')
 var webpackUploadPlugin = require('jdf2e-webpack-upload-plugin')
