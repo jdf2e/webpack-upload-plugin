@@ -41,4 +41,4 @@ module.exports = {
 * `host`: 要上传的目标服务器ip地址
 * `username`: 要上传的目标服务器用户名称
 * `password`: 要上传的目标服务器密码
-* `target`: 上传到服务器之后的目录名称，路径是相对于`/var/www/html/page.jd.com`。不要以`/`开头，否则会被认为是绝对路径。
+* `target`: 上传到服务器之后的目录名称，路径是相对于`/var/www/html/page.jd.com`。不要以`/`开头，否则会被认为是服务器的绝对路径。
