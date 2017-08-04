@@ -14,25 +14,25 @@ var path = require('path')
 var webpackUploadPlugin = require('jdf2e-webpack-upload-plugin')
 
 module.exports = {
-	entry: {
-		main: './index.js',
-		vendor: 'moment'
-	},
-	output: {
-		filename: '[name].[chunkhash].js',
-		path: path.resolve(__dirname, 'dist')
-	},
-	plugins: [
-		new webpack.optimize.CommonsChunkPlugin({
-			name: ['vendor', 'manifest']
-		}),
-		new webpackUploadPlugin({
-			username: 'test',
-			password: 'test',
-			host: '192.168.1.1',
-			target: 'webpackTest'
-		})
-	]
+    entry: {
+        main: './index.js',
+        vendor: 'moment'
+    },
+    output: {
+        filename: '[name].[chunkhash].js',
+        path: path.resolve(__dirname, 'dist')
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor', 'manifest']
+        }),
+        new webpackUploadPlugin({
+            username: 'test',
+            password: 'test',
+            host: '192.168.1.1',
+            target: 'webpackTest'
+        })
+    ]
 }
 ```
 
