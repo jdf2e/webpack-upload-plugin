@@ -1,5 +1,5 @@
 {
-  "name": "webpack-upload-plugin",
+  "name": "jdf2e-webpack-upload-plugin",
   "version": "1.0.0",
   "description": "webpack upload plugin",
   "main": "index.js",
@@ -8,6 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdf2e/webpack-upload-plugin.git"
   },
   "keywords": [
     "webpack",

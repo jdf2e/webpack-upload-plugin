@@ -7,19 +7,15 @@ function webpackUploadPlugin(options){
 
 webpackUploadPlugin.prototype.apply = function(compiler){
     var options = this.options
-    var source = options.source
+    var source = process.cwd()
     var target = options.target
     var username = options.username
     var password = options.password
     var host = options.host
-    var exclude = '.DS_Store|.babelrc|node_modules'
+    var exclude = options.exclude || `.DS_Store|.babelrc|.git|node_modules|${options.exclude}`
 
     if(!/^\//.test(target)){
         target = `/var/www/html/page.jd.com/${target}`
-    }
-
-    if(!source){
-        source = process.cwd()
     }
 
     if(!target){
@@ -46,6 +42,7 @@ webpackUploadPlugin.prototype.apply = function(compiler){
                                 console.log(error)
                             }else{
                                 console.log(`Upload ${source}/${filepath} success`)
+                                client.close()
                             }
                         });
                     }
