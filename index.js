@@ -25,6 +25,10 @@ webpackUploadPlugin.prototype.apply = function(compiler){
         return
     }
 
+    if(!fs.existsSync(source)){
+        fs.mkdirSync(source);
+    }
+    
     var filelist = fs.readdirSync(source)
     compiler.plugin('done', function(){
         client.defaults({
@@ -34,7 +38,7 @@ webpackUploadPlugin.prototype.apply = function(compiler){
         })
 
         glob(source, {}, function(error, files){
-            client.scp(files[0], `${username}:${password}@${host}:${target}/${options.source}`, function(error){
+            client.scp(files[0], `${username}:${password}@${host}:${target}`, function(error){
                 if(error){
                     console.log(error)
                 }else{
