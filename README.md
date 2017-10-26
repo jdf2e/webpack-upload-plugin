@@ -27,8 +27,6 @@ module.exports = {
             name: ['vendor', 'manifest']
         }),
         new webpackUploadPlugin({
-            username: 'test',
-            password: 'test',
             host: '192.168.1.1',
             target: 'webpackTest'
         })
@@ -39,8 +37,6 @@ module.exports = {
 ## Options
 
 * `host`: 要上传的目标服务器ip地址
-* `username`: 要上传的目标服务器用户名称
-* `password`: 要上传的目标服务器密码
 * `source`: 要上传的本地文件夹，例如`source: dist`
 * `cdn`: 选择需要上传的cdn服务器`misc`或者`static`。默认为`misc`
 * `target`: 上传到服务器之后的目录名称，路径是相对于`/var/www/html/page.jd.com`。不要以`/`开头，否则会被认为是服务器的绝对路径。

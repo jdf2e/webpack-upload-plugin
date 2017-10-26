@@ -1,6 +1,9 @@
-var client = require('scp2')
 var fs = require('fs')
 var glob = require('glob')
+var request = require('request');
+var jdfUtils = require('jdf-utils');
+var $ = jdfUtils.base;
+var f = jdfUtils.file;
 
 function webpackUploadPlugin(options){
     this.options = options
@@ -29,24 +32,23 @@ webpackUploadPlugin.prototype.apply = function(compiler){
         fs.mkdirSync(source);
     }
     
-    var filelist = fs.readdirSync(source)
     compiler.plugin('done', function(){
-        client.defaults({
-            username: username,
-            password: password,
-            host: host
-        })
+        var filelist = f.getdirlist(source);
+        var formData = {};
 
-        glob(source, {}, function(error, files){
-            client.scp(files[0], `${username}:${password}@${host}:${target}`, function(error){
-                if(error){
-                    console.log(error)
-                }else{
-                    console.log(`Upload ${source} success`)
-                    client.close()
-                }
-            })
-        })
+        filelist.forEach(file => {
+            formData[target + file.replace(source, '')] = fs.createReadStream(file);
+        });
+
+        request.post({ url: `http://${host}:3000`, formData: formData }, (error, res) => {
+            if (error) {
+              console.log(error);
+            } else if (res.statusCode !== 200) {
+              new Error(`remote server status error, code ${res.statusCode}`)
+            } else {
+              console.log(`Upload ${source} success`)
+            }
+        });
     })
 }
 
