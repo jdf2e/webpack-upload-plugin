@@ -14,9 +14,8 @@ webpackUploadPlugin.prototype.apply = function(compiler){
     var source = `${process.cwd()}/${options.source}`
     var target = options.target
     var cdn = (options.cdn === 'static' ? 'static.360buyimg.com' : 'misc.360buyimg.com')
-    var username = options.username
-    var password = options.password
-    var host = options.host
+    var host = options.host || '192.168.181.73'
+    var port = options.port || 3000
     var exclude = options.exclude || `.DS_Store|.babelrc|.git|node_modules|${options.exclude}`
 
     if(!/^\//.test(target)){
@@ -40,7 +39,7 @@ webpackUploadPlugin.prototype.apply = function(compiler){
             formData[target + file.replace(source, '')] = fs.createReadStream(file);
         });
 
-        request.post({ url: `http://${host}:3000`, formData: formData }, (error, res) => {
+        request.post({ url: `http://${host}:${port}`, formData: formData }, (error, res) => {
             if (error) {
               console.log(error);
             } else if (res.statusCode !== 200) {
