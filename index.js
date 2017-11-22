@@ -13,13 +13,13 @@ webpackUploadPlugin.prototype.apply = function(compiler){
     var options = this.options
     var source = `${process.cwd()}/${options.source}`
     var target = options.target
-    var cdn = (options.cdn === 'static' ? 'static.360buyimg.com' : 'misc.360buyimg.com')
+    var serverDir = (options.serverDir ? options.serverDir : 'misc.360buyimg.com')
     var host = options.host || '192.168.181.73'
     var port = options.port || 3000
     var exclude = options.exclude || `.DS_Store|.babelrc|.git|node_modules|${options.exclude}`
 
     if(!/^\//.test(target)){
-        target = `/var/www/html/${cdn}/${target}`
+        target = `/var/www/html/${serverDir}/${target}`
     }
 
     if(!target){
